@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useForm, useField } from 'vee-validate';
 import { z } from 'zod';
-import { toFormValidator } from '@vee-validate/zod';
+import { toTypedSchema } from '@vee-validate/zod';
 import { onMounted, ref } from 'vue';
 
 const firstInput = ref<HTMLInputElement | null>(null);
@@ -12,7 +12,7 @@ onMounted(() => {
 
 const required = { required_error: 'Veuillez renseigner ce champ' };
 
-const validationSchema = toFormValidator(
+const validationSchema = toTypedSchema(
     z.object({
         title: z.string(required).min(1, { message: 'Le titre doit faire au moins 1 caractère' }).max(20, { message: 'Le titre doit faire moins de 10 caractères' }),
         image: z.string(required),
@@ -57,34 +57,22 @@ const trySubmit = handleSubmit(async (formValues, { resetForm }) => {
             <div class="d-flex flex-column mb-20">
                 <label class="mb-5">*Titre</label>
                 <input ref="firstInput" v-model="title.value.value" type="text" />
-                <small
-                    class="form-error"
-                    v-if="title.errorMessage.value"
-                >{{ title.errorMessage.value }}</small>
+                <small class="form-error" v-if="title.errorMessage.value">{{ title.errorMessage.value }}</small>
             </div>
             <div class="d-flex flex-column mb-20">
                 <label class="mb-5">*Image</label>
                 <input v-model="image.value.value" type="text" />
-                <small
-                    class="form-error"
-                    v-if="image.errorMessage.value"
-                >{{ image.errorMessage.value }}</small>
+                <small class="form-error" v-if="image.errorMessage.value">{{ image.errorMessage.value }}</small>
             </div>
             <div class="d-flex flex-column mb-20">
                 <label class="mb-5">*Prix</label>
                 <input v-model="price.value.value" type="number" />
-                <small
-                    class="form-error"
-                    v-if="price.errorMessage.value"
-                >{{ price.errorMessage.value }}</small>
+                <small class="form-error" v-if="price.errorMessage.value">{{ price.errorMessage.value }}</small>
             </div>
             <div class="d-flex flex-column mb-20">
                 <label class="mb-5">*Description</label>
                 <textarea v-model="(description.value.value as string)"></textarea>
-                <small
-                    class="form-error"
-                    v-if="description.errorMessage.value"
-                >{{ description.errorMessage.value }}</small>
+                <small class="form-error" v-if="description.errorMessage.value">{{ description.errorMessage.value }}</small>
             </div>
             <div class="d-flex flex-column mb-20">
                 <label class="mb-5">*Catégorie</label>
@@ -94,10 +82,7 @@ const trySubmit = handleSubmit(async (formValues, { resetForm }) => {
                     <option value="desktop">Bureautique</option>
                     <option value="streaming">Stream</option>
                 </select>
-                <small
-                    class="form-error"
-                    v-if="category.errorMessage.value"
-                >{{ category.errorMessage.value }}</small>
+                <small class="form-error" v-if="category.errorMessage.value">{{ category.errorMessage.value }}</small>
             </div>
             <button class="btn btn-primary" :disabled="isSubmitting">Sauvegarder</button>
         </form>
