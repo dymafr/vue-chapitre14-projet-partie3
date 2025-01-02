@@ -28,6 +28,8 @@ const emit = defineEmits<{
 .grid {
     display: grid;
     grid-template-columns: 1fr;
+    grid-auto-rows: 400px;
+    gap: 20px;
     @include m.md {
         grid-template-columns: 1fr 1fr;
     }
@@ -37,7 +39,5 @@ const emit = defineEmits<{
     @include m.xl {
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
-    grid-auto-rows: 400px;
-    gap: 20px;
 }
 </style>

@@ -39,8 +39,8 @@ seed('projetproducts');
 </template>
 
 <style lang="scss">
-@import "./assets/scss/base.scss";
-@import "./assets/scss/debug.scss";
+@use "./assets/scss/base" as base;
+@use "./assets/scss/debug" as debug;
 
 .app-container {
     height: 100vh;
