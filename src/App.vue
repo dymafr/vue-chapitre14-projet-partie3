@@ -22,7 +22,7 @@ function navigate(page: Page): void {
     state.page = page;
 }
 
-seed('projetproducts');
+void seed('projetproducts');
 
 </script>
 

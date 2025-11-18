@@ -3,7 +3,7 @@
 
 <template>
     <footer class="d-flex flex-row justify-content-center align-items-center">
-        <p>Copyright © 2014-2022 Dyma</p>
+        <p>Copyright © 2014-2026 Dyma</p>
     </footer>
 </template>
 

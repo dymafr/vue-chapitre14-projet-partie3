@@ -10,19 +10,19 @@ onMounted(() => {
     firstInput.value?.focus();
 })
 
-const required = { required_error: 'Veuillez renseigner ce champ' };
+const required = { error: 'Veuillez renseigner ce champ' };
 
 const validationSchema = toTypedSchema(
     z.object({
-        title: z.string(required).min(1, { message: 'Le titre doit faire au moins 1 caractère' }).max(20, { message: 'Le titre doit faire moins de 10 caractères' }),
+        title: z.string(required).min(1, { error: 'Le titre doit faire au moins 1 caractère' }).max(20, { error: 'Le titre doit faire moins de 10 caractères' }),
         image: z.string(required),
-        price: z.number(required).min(0, { message: 'Le prix doit être superieur à 0' }).max(15000, { message: 'Le prix doit être inferieur à 15 000' }),
-        description: z.string(required).min(10, { message: 'La description doit faire au moins 10 caractères' }),
+        price: z.number(required).min(0, { error: 'Le prix doit être superieur à 0' }).max(15000, { error: 'Le prix doit être inferieur à 15 000' }),
+        description: z.string(required).min(10, { error: 'La description doit faire au moins 10 caractères' }),
         category: z.string(required)
     })
 );
 
-const { handleSubmit, isSubmitting } = useForm({
+const form = useForm({
     validationSchema
 })
 
@@ -31,8 +31,9 @@ const image = useField('image');
 const price = useField('price');
 const description = useField('description');
 const category = useField('category');
+const { isSubmitting } = form;
 
-const trySubmit = handleSubmit(async (formValues, { resetForm }) => {
+const trySubmit = form.handleSubmit(async (formValues, { resetForm }) => {
     try {
         await fetch('https://restapi.fr/api/projetproducts', {
             method: 'POST',
@@ -46,7 +47,7 @@ const trySubmit = handleSubmit(async (formValues, { resetForm }) => {
     } catch (e) {
         console.log(e);
     }
-})
+});
 
 </script>
 
